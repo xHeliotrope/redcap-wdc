@@ -1,0 +1,266 @@
+<html>
+<head>
+    <title>REDCap Clinical Database WDC</title>
+    <meta http-equiv="Cache-Control" content="no-store" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <style>
+  .btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+  }
+  .btn-primary {
+      background: #a51417;
+      color: #ffffff;
+    }
+  .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+      background: #a51417;
+  }
+  .btn-primary:active, .btn-primary.active {
+      background: #a51417;
+      box-shadow: none;
+  }
+  .input-group .form-control:first-child {
+    width: 47%;
+    margin-right: 3%;
+  }
+  .input-group .form-control{
+      width: 50%;
+    }
+  .input-div {
+    border-left: solid 1px #a51417;
+    border-right: solid 1px #a51417;
+    border-bottom: solid 1px #a51417;
+    background: #eee;
+    padding-bottom: 30px;
+    padding-top: 30px;
+  }
+  .itop{
+    border-top: solid 1px #a51417;
+  }
+  .ibot{
+    border-bottom: solid 1px #a51417;
+  }
+  .hero-unit {
+    position: relative;
+    padding: 30px 15px;
+    color: #F5F5F5;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(0,0,0,.1);
+    background: #a51417;
+  }
+  .col-centered {
+    float: none;
+    margin: 0 auto;
+  }
+  .row{
+    background: #eeeeee;
+  }
+  .form-group {
+    margin-left:0px;
+  }
+  #hero-top{
+    background: red;
+    padding: 0;
+  }
+  .masthead {
+      padding-bottom: 10px;
+      border-top: #72121b 5px solid;
+      background: rgba(0,0,0,.5);
+  }
+  .head-logo {
+      padding-left: 60px;
+      text-align: left;
+      padding-top: 10px;
+  }
+  h4 {
+    text-decoration: underline;
+    margin:15px 0;
+  }
+  </style>
+</head>
+<body>
+  <header id="hero-top" class="hero-unit">
+    <div class="masthead clearfix">
+      <div class="container">
+        <div class="head-logo">
+          <a href="https://crib.wustl.edu">
+            <img class="head-logo-image" src="https://wustl.edu/wp-content/themes/wustl_edu/_assets/img/WashU-1linerev.svg" alt="Washington University in St. Louis" height="31" width="355"></img>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-8 col-centered">
+        <div class="hero-unit" style="margin:0 -15px">
+          <h1 style="padding-bottom:20px"> (Tableau - REDCap)</h1>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-8 col-centered"
+      style="background:white; padding-bottom:10px; padding-top:30px">
+        <div class="row" style="background:white">
+          <div class="col-lg-8 col-md-8 col-sm-8 col-centered">
+            <div class="panel panel-default">
+              <div class="panel-heading panel-body">
+                <h3 style="text-align:center; margin:5px 0">REDCap Web Data Connector for Tableau</h3>
+                  <p style="padding: 15px">This web data connector provides a connection between
+                    the REDCap research database and Tableau server.
+                    As a collaboration between the <a href="https://publichealth.wustl.edu">
+                    Institute of Public Health</a> and the <a href="http://crib.wustl.edu">
+                    Center for Research Innovation in Biotechnology</a>,
+                    the web data connector will allow researchers to access, view
+                    and analyze data from a secure endpoint in the WUSM Network.
+                  </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="background:white">
+          <div class="col-lg-8 col-md-8 col-sm-8 col-centered input-div itop">
+            <p>To connector your REDCap Data to Tableau, submit your API Token and
+              the url to your university's REDCap server. You may need to contact a
+              REDCap admin to receive an API Token for your REDCap Account.</p>
+            <div class="form-group">
+              <label for="usr">API Token:</label>
+              <input type="text" class="form-control" id="token" placeholder="ABCDEF...">
+            </div>
+            <div class="form-group">
+              <label for="pwd">REDCap URL:</label>
+              <input type="text" class="form-control" id="url" placeholder="https://redcap.universityservers.edu/api">
+            </div>
+            <button class="btn btn-default" id="submitButton" type="button">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://connectors.tableau.com/libs/tableauwdc-2.0.8.min.js" type="text/javascript"></script>
+  <script>
+  (function() {
+
+      var url = "https://redcap.wustl.edu/redcap/srvrs/prod_v3_1_0_001/redcap/api/";
+
+      var myConnector = tableau.makeConnector();
+
+      // Define the schema
+      //  myConnector.getSchema = function(schemaCallback){}
+
+        myConnector.getSchema = function(schemaCallback) {
+          var recordsInfo = [];
+          console.log("in here");
+          $.ajax({
+            url: tableau.connectionData.url,
+            type: "POST",
+            data: {
+              token: tableau.connectionData.token,
+              content: 'exportFieldNames',
+              format: 'json',
+              returnFormat: 'json',
+              type: 'flat',
+              rawOrLabelHeaders: 'raw',
+              exportCheckboxLabel: 'true',
+              exportSurveyFields: 'true',
+              exportDataAccessGroups: 'true'
+              },
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            success: function(resp){
+                recordsInfo = resp;
+                var recordSchema = [];
+                recordsInfo.forEach(function(field){
+                  recordSchema.push({
+                    id: field.export_field_name,
+                    alias: field.original_field_name,
+                    dataType: tableau.dataTypeEnum.string
+                  });
+                });
+                var redcapTable = {
+                  id: "redcap",
+                  alias: "custom redcap extract",
+                  columns: recordSchema
+                }
+                schemaCallback([redcapTable]);
+              }
+            });
+        };
+
+
+      // Download the data
+      myConnector.getData = function(table, doneCallback) {
+
+        var tableData = [], ajaxDone = false;
+
+          $.ajax({
+            url: tableau.connectionData.url,
+            type: "POST",
+            data: {
+              token: tableau.connectionData.token,
+              content: 'record',
+              format: 'json',
+              returnFormat: 'json',
+              type: 'flat',
+              rawOrLabelHeaders: 'raw',
+              exportCheckboxLabel: 'true',
+              exportSurveyFields: 'true',
+              exportDataAccessGroups: 'true'
+            },
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            success: function(resp){
+            resp.forEach(function(record){
+              tableData.push(record);
+            });
+            table.appendRows(tableData);
+            doneCallback();
+          }
+        });
+      }
+
+      function tokenCheker(toke){
+        return $.ajax({
+          type: "POST",
+          url: url,
+          data: {
+            token: toke,
+            content: 'exportFieldNames',
+            format: 'json',
+            returnFormat: 'json',
+            type: 'flat',
+            rawOrLabelHeaders: 'raw',
+            exportCheckboxLabel: 'true',
+            exportSurveyFields: 'true',
+            exportDataAccessGroups: 'true'
+          },
+          contentType: "application/x-www-form-urlencoded",
+          dataType: "json",
+          success: function(resp){
+            return true;
+          },
+          error: function(err){
+            return false;
+          }
+        });
+      }
+
+      tableau.registerConnector(myConnector);
+
+      $(document).ready(function (){
+        $("#submitButton").click(function() {
+            tableau.connectionData = {
+              'token': $("#token").val(),
+              'url': $("#url").val()
+            }
+            //var isValid = tokenCheker(tableau.connectionData);
+            tableau.connectionName = "REDCap Data";
+            tableau.submit();
+        });
+      });
+
+  })();
+</script>
+</body>
+</html>
