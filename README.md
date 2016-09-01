@@ -5,7 +5,8 @@ REDCap Web Data Connector for Tableau
  
  * have node
  * clone this repo
- * `npm start` in root dir
+ * `npm install` in root dir
+ * `npm start`
  * `../redcap-wdc.html` in Connector URL
  * Click green button
 
