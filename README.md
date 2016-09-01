@@ -11,7 +11,7 @@ REDCap Web Data Connector for Tableau
 
 ### (in simulated connector)
  
-  * enter API Token(recieved from REDCap admin for you project)
+  * enter API Token(recieved from REDCap admin for your project)
   * enter REDCap API URL
 
 
