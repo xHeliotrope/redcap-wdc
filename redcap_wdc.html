@@ -140,9 +140,10 @@
   </div>
   <script src="https://connectors.tableau.com/libs/tableauwdc-2.0.8.min.js" type="text/javascript"></script>
   <script>
+
   (function() {
 
-      var url = "https://redcap.wustl.edu/redcap/srvrs/prod_v3_1_0_001/redcap/api/";
+      var url = "https://redcap.wustl.edu/redcap/srvrs/dev_v3_1_0_001/redcap/api/";
 
       var myConnector = tableau.makeConnector();
 
@@ -151,12 +152,11 @@
 
         myConnector.getSchema = function(schemaCallback) {
           var recordsInfo = [];
-          console.log("in here");
           $.ajax({
-            url: tableau.connectionData.url,
+            url: JSON.parse(tableau.connectionData)['url'],
             type: "POST",
             data: {
-              token: tableau.connectionData.token,
+              token: JSON.parse(tableau.connectionData)['token'],
               content: 'exportFieldNames',
               format: 'json',
               returnFormat: 'json',
@@ -186,19 +186,18 @@
                 schemaCallback([redcapTable]);
               }
             });
-        };
+         };
 
 
       // Download the data
       myConnector.getData = function(table, doneCallback) {
 
-        var tableData = [], ajaxDone = false;
-
+        var tableData = [];
           $.ajax({
-            url: tableau.connectionData.url,
+            url: JSON.parse(tableau.connectionData)['url'],
             type: "POST",
             data: {
-              token: tableau.connectionData.token,
+              token: JSON.parse(tableau.connectionData)['token'],
               content: 'record',
               format: 'json',
               returnFormat: 'json',
@@ -218,7 +217,9 @@
             doneCallback();
           }
         });
-      }
+        
+        }
+        
 
       function tokenCheker(toke){
         return $.ajax({
@@ -250,10 +251,10 @@
 
       $(document).ready(function (){
         $("#submitButton").click(function() {
-            tableau.connectionData = {
+            tableau.connectionData = JSON.stringify({
               'token': $("#token").val(),
               'url': $("#url").val()
-            }
+            });
             //var isValid = tokenCheker(tableau.connectionData);
             tableau.connectionName = "REDCap Data";
             tableau.submit();
