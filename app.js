@@ -18,5 +18,5 @@ app.post('/', function(req, res){
 
 port = process.env.PORT || 3000;
 app.listen(port, function() {
-    console.log('we left the backdoor open and they got right in!');
+    console.log('wdc is running');
 });
