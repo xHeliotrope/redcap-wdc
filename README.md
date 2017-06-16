@@ -6,7 +6,7 @@ REDCap Web Data Connector for Tableau
  * make a directory on your computer to run the server
    - ex. `C:\Users\Sarah\SarahsTableauConnector`
  * install [git-bash](https://git-scm.com/download/win)
- * isntall [node](https://nodejs.org/en/download/)
+ * install [node](https://nodejs.org/en/download/)
  * open up git bash
  * move your current directory to the directory you made above
    - ex. `cd C:\Users\Sarah\Development\TableauConnector` 
