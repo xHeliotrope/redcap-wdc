@@ -9,7 +9,7 @@ REDCap Web Data Connector for Tableau
  * install [node](https://nodejs.org/en/download/)
  * open up git bash
  * move your current directory to the directory you made above
-   - ex. `cd C:\Users\Sarah\SarahsTableauConnector` 
+   - ex. in git-bash, type `cd C:\Users\Sarah\SarahsTableauConnector` 
  * make sure node is working by typing `node --version` into git-bash
    - you should get a value like *v6.10.3* on the next line
  * if that worked type git clone https://github.com/xHeliotrope/redcap-wdc.git
