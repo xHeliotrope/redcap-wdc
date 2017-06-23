@@ -143,8 +143,6 @@
 
   (function() {
 
-      var url = "https://redcap.wustl.edu/redcap/srvrs/dev_v3_1_0_001/redcap/api/";
-
       var myConnector = tableau.makeConnector();
 
       // Define the schema
@@ -217,35 +215,7 @@
             doneCallback();
           }
         });
-        
         }
-        
-
-      function tokenCheker(toke){
-        return $.ajax({
-          type: "POST",
-          url: url,
-          data: {
-            token: toke,
-            content: 'exportFieldNames',
-            format: 'json',
-            returnFormat: 'json',
-            type: 'flat',
-            rawOrLabelHeaders: 'raw',
-            exportCheckboxLabel: 'true',
-            exportSurveyFields: 'true',
-            exportDataAccessGroups: 'true'
-          },
-          contentType: "application/x-www-form-urlencoded",
-          dataType: "json",
-          success: function(resp){
-            return true;
-          },
-          error: function(err){
-            return false;
-          }
-        });
-      }
 
       tableau.registerConnector(myConnector);
 
@@ -255,7 +225,6 @@
               'token': $("#token").val(),
               'url': $("#url").val()
             });
-            //var isValid = tokenCheker(tableau.connectionData);
             tableau.connectionName = "REDCap Data";
             tableau.submit();
         });
