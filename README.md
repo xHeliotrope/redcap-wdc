@@ -16,22 +16,8 @@ REDCap Web Data Connector for Tableau
  * some downloading text should appear, once thats done, type `cd redcap-wdc`
  * type `npm install`
  * type `node app.js`
- * in a web browser, go to [localhost:3000](localhost:3000)
- * if Tableau is running on your computer, then enter in your REDCap URL and API Key
+ * if Tableau is running on your computer(version 9 or later) click on the **web data connector** datasource
+ * navigate to [localhost:3000](localhost:3000) in the window that pops up
+ * enter in your REDCap URL and API Key
  * click submit
  * enjoy!
-
-
-## For Developers
-
-#### Testing in the simulator
- 
- * have node
- * clone this repo
- * `npm install` in root dir
- * `node app.js`
- * enter API Token(recieved from REDCap admin for your project)
- * enter REDCap API URL
- * Click submit
-
-
