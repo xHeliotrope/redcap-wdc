@@ -25,10 +25,6 @@ REDCap Web Data Connector for Tableau
  ## for Linux/Unix(Mac)
  * install [node](https://nodejs.org/en/download/)
  * open up your terminal
- * make a directory on your computer to run the server
-   - ex. `mkdir my_wdc_directory`
- * move your current directory to the directory you made above
-   - ex. `cd my_wdc_directory`
  * `git clone https://github.com/xHeliotrope/redcap-wdc.git`
  * `cd redcap-wdc`
  * `npm install`
